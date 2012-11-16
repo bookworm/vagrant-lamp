@@ -5,7 +5,10 @@ Vagrant::Config.run do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "lucid32"
-  config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
+  config.vm.box_url = "~/vmimages/lucid32.box"
+
+  config.vm.share_folder("v-web", "/vagrant/public", "./public", :nfs => true)
+  config.vm.network :hostonly, "192.168.50.4"
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "cookbooks"
